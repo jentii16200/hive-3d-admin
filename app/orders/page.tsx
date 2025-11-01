@@ -1,12 +1,14 @@
 "use client";
 
 import useGetOrders from "@/hooks/useGetOrders";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 
 export default function OrdersPage() {
   const [page, setPage] = useState(1);
   const limit = 10; // items per page
-
+  const router = useRouter();
   const { data, pagination, isLoading } = useGetOrders(page, limit);
 
   if (isLoading) return <p className="text-center mt-10">Loading orders...</p>;
@@ -45,7 +47,10 @@ export default function OrdersPage() {
                   </td>
                   <td className="p-3">{order.totalAmount}</td>
                   <td className="p-3 text-center space-x-2">
-                    <button className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                    <button
+                      onClick={() => router.push(`/orders/${order._id}`)}
+                      className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                    >
                       View
                     </button>
                     <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
