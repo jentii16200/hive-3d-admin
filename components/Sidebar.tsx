@@ -1,15 +1,12 @@
 // components/BaseLayout.tsx
 "use client";
 
-import { useState } from "react";
+import { Banknote, Home, Menu, Settings, Shirt, Users, X } from "lucide-react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Home, Users, Shirt, Settings, Banknote } from "lucide-react";
+import { useState } from "react";
 
-export default function Sidebar({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Sidebar({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
 
@@ -35,7 +32,16 @@ export default function Sidebar({
         } bg-yellow-300 text-black flex flex-col transition-all`}
       >
         <div className="flex items-center justify-between p-4 font-bold text-xl group">
-          {isOpen ? <img src="images/logo1.png" width={100} /> : <img src="images/logo1.png" width={50} />}
+          {isOpen ? (
+            <Image
+              src="/images/logo1.png"
+              alt="logo"
+              width={100}
+              height={100}
+            />
+          ) : (
+            <Image src="/images/logo1.png" alt="logo" width={50} height={50} />
+          )}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="p-1 rounded hover:bg-yellow-400 ml-[16px]"
