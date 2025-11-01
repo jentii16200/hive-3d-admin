@@ -1,14 +1,20 @@
-// app/edit-order/page.jsx (or wherever your page is)
 
-'use client'; // Required for interactivity (dropdown toggle)
+'use client'; 
 
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const Page = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('To Ship');
 
-  const statuses = ['Peding', 'To Ship', 'To Receive', 'Completed', 'Cancelled'];
+  const router = useRouter();
+
+  const handleGoBack = () => {
+        router.push('/orders'); 
+  };
+
+  const statuses = ['Peding', 'To Ship', 'To Receive', 'Completed'];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -26,10 +32,14 @@ const Page = () => {
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
         {/* Back Button */}
-        <button className="mb-6 p-2 bg-gray-200 rounded-full hover:bg-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+        <button
+            onClick={handleGoBack}
+            className="mb-6 p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
+            aria-label="Go back to home"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
         </button>
 
         {/* Order Card */}
